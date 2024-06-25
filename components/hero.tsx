@@ -1,5 +1,5 @@
-import VideoThumb from '@/public/images/hero-image-01.jpg'
-import ModalVideo from '@/components/modal-video'
+import Image from "next/image";
+import Batiment from "@/public/images/batiment_ajuste.png";
 
 export default function Hero() {
   return (
@@ -30,22 +30,29 @@ export default function Hero() {
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Demander un devis</a>
+                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Demander
+                  un devis</a>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Nous découvrir</a>
+                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Notre savoir-faire</a>
               </div>
             </div>
           </div>
 
-          <ModalVideo
-            thumb={VideoThumb}
-            thumbWidth={1024}
-            thumbHeight={576}
-            thumbAlt="Modal video thumbnail"
-            video="/videos/video.mp4"
-            videoWidth={1920}
-            videoHeight={1080} />
+          {/*<ModalVideo*/}
+          {/*    thumb={VideoThumb}*/}
+          {/*    thumbWidth={1024}*/}
+          {/*    thumbHeight={576}*/}
+          {/*    thumbAlt="Modal video thumbnail"*/}
+          {/*    video="/videos/video.mp4"*/}
+          {/*    videoWidth={1920}*/}
+          {/*    videoHeight={1080}/>*/}
+
+          <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1"
+               data-aos="fade-up">
+            <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Batiment} width={540} height={405}
+                   alt="Features 01"/>
+          </div>
 
         </div>
 
