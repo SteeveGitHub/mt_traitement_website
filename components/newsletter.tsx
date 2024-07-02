@@ -1,5 +1,34 @@
+"use client";
+
+import {useState} from "react";
+import {toast} from "react-toastify";
+
 export default function Newsletter() {
 
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async (e : any) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        toast.success('Email transmis');
+        setEmail('');
+
+      } else {
+        console.log(response)
+        toast.error("Erreur à l'envoi de l'email");
+      }
+    } catch (error) {
+      toast.error('Erreur inconnue')
+    }
+  };
 
 
   return (
@@ -35,8 +64,16 @@ export default function Newsletter() {
             {/* CTA form */}
             <form className="w-full lg:w-1/2">
               <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
-                <input type="email" className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400" placeholder="Votre email..." aria-label="Votre email…" />
-                <a className="btn text-purple-600 bg-purple-100 hover:bg-white shadow" href="#0">Contact</a>
+                <input
+                    type="email"
+                       className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300
+                       rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400"
+                       placeholder="Votre email..."
+                       aria-label="Votre email…"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <button onClick={handleSubmit} className="btn text-purple-600 bg-purple-100 hover:bg-white shadow">Contact</button>
               </div>
               {/* Success message */}
               {/* <p className="text-center lg:text-left lg:absolute mt-2 opacity-75 text-sm">Thanks for subscribing!</p> */}
