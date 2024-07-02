@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from 'react';
-import {useDropzone} from "react-dropzone";
+import React, { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import ReCAPTCHA from "react-google-recaptcha";
+import {toast} from "react-toastify";
 
 export default function SignUp() {
+  const [isLoading, setIsLoading] = useState(false); // New state for loader
+  const recaptchaRef: any = React.createRef();
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
@@ -11,6 +15,7 @@ export default function SignUp() {
     message: ''
   });
   const [files, setFiles] = useState([]);
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = (e : any) => {
     setFormData({
@@ -22,18 +27,22 @@ export default function SignUp() {
   const handleSubmit = async (e : any) => {
     e.preventDefault();
 
-    console.log(files)
+    if (!captchaToken) {
+      toast.warning("Complétez à nouveau le CAPTCHA");
+      return;
+    }
+
+    setIsLoading(true); // Start loader
 
     const formDataToSend = new FormData();
     formDataToSend.append('fullName', formData.fullName);
     formDataToSend.append('companyName', formData.companyName);
     formDataToSend.append('email', formData.email);
     formDataToSend.append('message', formData.message);
+    formDataToSend.append('captchaToken', captchaToken);
     files.forEach(file => {
       formDataToSend.append('files', file);
     });
-
-    console.log(formDataToSend)
 
     try {
       const response = await fetch('/api/send-contact', {
@@ -42,14 +51,21 @@ export default function SignUp() {
       });
 
       if (response.ok) {
-        alert('Email transmis');
+
+        setIsLoading(false); // Stop loader
+        toast.success('Email transmis');
         setFormData({ fullName: '', companyName: '', email: '', message: '' });
         setFiles([]);
+        setCaptchaToken(null);
       } else {
-        alert('Erreur à l\'envoi de l\'email');
+        setIsLoading(false)
+        toast.error('Erreur à l\'envoi de l\'email');
+
       }
     } catch (error) {
-      alert('Erreur à l\'envoi de l\'email');
+      setIsLoading(false); // Stop loader
+      toast.error('Erreur à l\'envoi de l\'email');
+
     }
   };
 
@@ -61,6 +77,10 @@ export default function SignUp() {
     onDrop,
     maxSize: 25 * 1024 * 1024 // 25MB limit for Gmail attachments
   });
+
+  const onCaptchaChange = (value : any) => {
+    setCaptchaToken(value);
+  };
 
   return (
       <section className="relative">
@@ -143,6 +163,14 @@ export default function SignUp() {
                     </div>
                   </div>
                 </div>
+                <div className="flex justify-center mb-4">
+                  <ReCAPTCHA
+                      sitekey="6LdShgYqAAAAALquTlfuG6MTj3n_LZOqZNBUbROy"
+                      onChange={onCaptchaChange}
+                      ref={recaptchaRef}
+
+                  />
+                </div>
                 <div className="flex flex-wrap -mx-3 mt-6">
                   <div className="w-full px-3">
                     <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full" type="submit">
@@ -151,6 +179,12 @@ export default function SignUp() {
                   </div>
                 </div>
               </form>
+              {isLoading && (
+                  <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="loader"></div>
+                  </div>
+              )}
+
             </div>
           </div>
         </div>

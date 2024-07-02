@@ -3,6 +3,7 @@ import fs from 'fs';
 import formidable from 'formidable';
 import path from 'path';
 import archiver from 'archiver';
+import fetch from 'node-fetch';
 
 export const config = {
     api: {
@@ -30,7 +31,21 @@ export default async function handler(req, res) {
                 return res.status(500).json({ error: 'Error parsing files' });
             }
 
-            const { fullName, companyName, email, message } = fields;
+            const { fullName, companyName, email, message, captchaToken } = fields;
+
+            // Verify reCAPTCHA token
+            const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+            const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`;
+
+            const response = await fetch(verificationUrl, {
+                method: 'POST',
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                return res.status(400).json({ error: 'Invalid CAPTCHA' });
+            }
 
             // Create a transporter object
             let transporter = nodemailer.createTransport({
