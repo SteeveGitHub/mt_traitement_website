@@ -1,18 +1,39 @@
-import Image from 'next/image'
+"use client";
 
-import FeatImage01 from '@/public/images/features-03-image-01.png'
-import FeatImage02 from '@/public/images/features-03-image-02.png'
-import FeatImage03 from '@/public/images/features-03-image-03.png'
+import Image from 'next/image';
+import Slider from "react-slick"; // Importer react-slick
+
+import FeatImage01 from '@/public/images/features-03-image-01.png';
+import FeatImage02 from '@/public/images/features-03-image-02.png';
+import FeatImage03 from '@/public/images/features-03-image-03.png';
 
 export default function Zigzag() {
+  const images = [
+    { src: FeatImage01, alt: "Phosphatation" },
+    { src: FeatImage02, alt: "Zingage" },
+    { src: FeatImage03, alt: "Brunissage" }
+  ];
+
+  // Configuration du carrousel
+  const carouselSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
   return (
-      <section id={"zigzag"}>
+      <section id="zigzag">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-12 md:py-20 border-t border-gray-800">
-
             {/* Section header */}
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">Nos différents traitements</div>
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+                Nos différents traitements
+              </div>
               <h1 className="h2 mb-4">Une équipe, plusieurs solutions.</h1>
               <p className="text-xl text-gray-400">
                 Nous proposons un large panel de prestations pour répondre à tous vos besoins. Découvrez nos différents
@@ -22,12 +43,23 @@ export default function Zigzag() {
 
             {/* Items */}
             <div className="grid gap-20">
-
               {/* 1st item: Manganese Phosphating */}
-              <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id={'phosphatation'}>
+              <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id="phosphatation">
                 {/* Image */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                  <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage01} width={540} height={405} alt="Phosphatation" />
+                  <Slider {...carouselSettings}>
+                    {images.map((image, index) => (
+                        <div key={index}>
+                          <Image
+                              className="max-w-full mx-auto md:max-w-none h-auto"
+                              src={image.src}
+                              width={540}
+                              height={405}
+                              alt={image.alt}
+                          />
+                        </div>
+                    ))}
+                  </Slider>
                 </div>
                 {/* Content */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
@@ -37,7 +69,7 @@ export default function Zigzag() {
                       La phosphatation manganèse est utilisée pour protéger les pièces en acier et en fonte. Ce procédé forme une couche protectrice augmentant la résistance à l'usure et à la corrosion, et améliore l'adhérence des huiles de lubrification.
                     </p>
                     <p className="text-lg text-gray-400 mb-4">
-                      <strong>Processus : </strong> dégraissage, attaque acide (décapage), traitement au manganèse, rinçage et finition (sèche ou grasse).
+                      <strong>Processus :</strong> dégraissage, attaque acide (décapage), traitement au manganèse, rinçage et finition (sèche ou grasse).
                     </p>
                     <ul className="text-lg text-gray-400 -mb-2">
                       <li className="flex items-center mb-2">
@@ -57,12 +89,6 @@ export default function Zigzag() {
                           <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                         </svg>
                         <span>Finition au choix : sèche ou grasse (huile).</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-                        </svg>
-                        <span>Exemple d'application : engrenages, pignons, et autres pièces mécaniques nécessitant une bonne lubrification et résistance à l'usure.</span>
                       </li>
                     </ul>
                   </div>
