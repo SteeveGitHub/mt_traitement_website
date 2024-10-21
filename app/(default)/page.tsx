@@ -1,3 +1,5 @@
+import CookieBanner from "@/components/cookie-banner";
+
 export const metadata = {
   title: 'Home - Open PRO',
   description: 'Page description',
@@ -12,6 +14,7 @@ import Testimonials from '@/components/testimonials'
 export default function Home() {
   return (
     <>
+        {/*<CookieBanner/>*/}
       <Hero />
       <Features />
       <Zigzag />

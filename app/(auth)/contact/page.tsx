@@ -34,7 +34,7 @@ export default function SignUp() {
 
     setIsLoading(true); // Start loader
 
-    const formDataToSend = new FormData();
+    const formDataToSend : any = new FormData();
     formDataToSend.append('fullName', formData.fullName);
     formDataToSend.append('companyName', formData.companyName);
     formDataToSend.append('email', formData.email);

@@ -24,9 +24,9 @@ export default function Hero() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-4" data-aos="fade-up">Bienvenue chez MT TRAITEMENT</h1>
+            <h1 className="h1 mb-4" data-aos="fade-up">MT TRAITEMENT</h1>
             <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">
-              Nous sommes spécialisés dans le traitement de surfaces métalliques.
+              Spécialiste du traitement de surfaces métalliques.
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
@@ -34,7 +34,7 @@ export default function Hero() {
                   un devis</a>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Notre savoir-faire</a>
+                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#zigzag">Notre savoir-faire</a>
               </div>
             </div>
           </div>

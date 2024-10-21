@@ -3,7 +3,7 @@ import MobileMenu from './mobile-menu'
 import Image from 'next/image'
 export default function Header() {
   return (
-    <header className="absolute w-full z-30">
+    <header className="absolute w-full z-30 bg-gray-50 opacity-90">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Site branding */}
@@ -24,10 +24,28 @@ export default function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  href="/#zigzag"
+                  href="/#phosphatation"
                   className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
                 >
-                  Notre savoir-faire
+                  Phosphatation
+                </Link>
+              </li>
+              <li>
+
+                <Link
+                    href="/#zingage"
+                    className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                >
+                  Zingage
+                </Link>
+              </li>
+              <li>
+
+                <Link
+                    href="/#brunissage"
+                    className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                >
+                  Brunissage
                 </Link>
               </li>
               <li>
