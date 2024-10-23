@@ -3,26 +3,27 @@
 import Image from 'next/image';
 import Slider from "react-slick"; // Importer react-slick
 
-import FeatImage01 from '@/public/images/features-03-image-01.png';
-import FeatImage02 from '@/public/images/features-03-image-02.png';
-import FeatImage03 from '@/public/images/features-03-image-03.png';
+import phosphat1 from '@/public/images/phosphat/features-03-image-01.png';
+import zingage1 from '@/public/images/zingage/features-03-image-02.png';
+import bruni1 from '@/public/images/brut/cloche.jpg';
 
 export default function Zigzag() {
   const images = [
-    { src: FeatImage01, alt: "Phosphatation" },
-    { src: FeatImage02, alt: "Zingage" },
-    { src: FeatImage03, alt: "Brunissage" }
+    { src: phosphat1, alt: "Phosphatation" },
+    { src: zingage1, alt: "Zingage" },
+    { src: bruni1, alt: "Brunissage" }
   ];
 
   // Configuration du carrousel
   const carouselSettings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
+    adaptiveHeight: true,
   };
 
   return (
@@ -44,18 +45,17 @@ export default function Zigzag() {
             {/* Items */}
             <div className="grid gap-20">
               {/* 1st item: Manganese Phosphating */}
-              <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id="phosphatation">
+              <div className="md:grid md:grid-cols-12 md:gap-6 items-center justify-center" id="phosphatation">
                 {/* Image */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
                     {images.map((image, index) => (
-                        <div key={index}>
+                        <div className="flex justify-center items-center w-full h-full" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100%' }}>
                           <Image
-                              className="max-w-full mx-auto md:max-w-none h-auto"
+                              className="object-contain max-h-full"
                               src={image.src}
-                              width={540}
-                              height={405}
                               alt={image.alt}
+                              style={{ float : "left", width: "500", height : "500", objectFit: "cover"}} // Cela s'assure que l'image ne dépasse pas et reste proportionnelle
                           />
                         </div>
                     ))}
@@ -99,7 +99,7 @@ export default function Zigzag() {
               <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id={'zingage'}>
                 {/* Image */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                  <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage02} width={540} height={405} alt="Zingage" />
+                  <Image className="max-w-full mx-auto md:max-w-none h-auto" src={zingage1} width={540} height={405} alt="Zingage" />
                 </div>
                 {/* Content */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left">
@@ -145,7 +145,7 @@ export default function Zigzag() {
               <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id={'brunissage'}>
                 {/* Image */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                  <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage03} width={540} height={405} alt="Brunissage" />
+                  <Image className="max-w-full mx-auto md:max-w-none h-auto" src={bruni1} width={540} height={405} alt="Brunissage" />
                 </div>
                 {/* Content */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
@@ -188,7 +188,6 @@ export default function Zigzag() {
               </div>
 
             </div>
-
           </div>
         </div>
       </section>
