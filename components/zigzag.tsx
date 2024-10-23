@@ -3,22 +3,59 @@
 import Image from 'next/image';
 import Slider from "react-slick"; // Importer react-slick
 
-import FeatImage01 from '@/public/images/phosphat/features-03-image-01.png';
-import FeatImage02 from '@/public/images/brut/caisse_tiges.png';
-import FeatImage03 from '@/public/images/zingage/deuxpieces_zing.jpg';
+import phosphatation1 from '@/public/images/phosphat/features-03-image-01.png';
+
+import zingage1 from '@/public/images/zingage/deuxpieces_zing.jpg';
+import zingage2 from '@/public/images/zingage/features-03-image-02.png';
+import zingage3 from '@/public/images/zingage/pieces_multi_zing.jpg';
+import zingage5 from '@/public/images/zingage/testimonial-03.jpg';
+import zingage6 from '@/public/images/zingage/testimonial-02.jpg';
+import zingage7 from '@/public/images/zingage/vis_zing.jpg';
+
+import bruni1 from '@/public/images/brunissage/bruni.jpg';
+import bruni2 from '@/public/images/brunissage/features-03-image-03.png';
+import bruni3 from '@/public/images/brunissage/bruni_huile2.jpg';
+
+import brut1 from '@/public/images/brut/cloche.jpg';
+import brut2 from '@/public/images/brut/caisse_tiges.png';
+import brut3 from '@/public/images/brut/non_traite.jpg';
 
 export default function Zigzag() {
   const images = [
-    { src: FeatImage01, alt: "Phosphatation" },
-    { src: FeatImage02, alt: "Zingage" },
-    { src: FeatImage03, alt: "Brunissage" }
+    { src: phosphatation1, alt: "Phosphatation" },
+    { src: zingage1, alt: "Zingage" },
+    { src: bruni1, alt: "Brunissage" }
   ];
+
+  const phosphatationImg = [
+    { src: phosphatation1, alt: "Phosphatation" },
+    { src: brut1, alt: "Brut" },
+    { src: brut2, alt: "Brut" },
+    { src: brut3, alt: "Brut" }
+
+  ];
+
+  const zingageImg = [
+    { src: zingage1, alt: "Zingage" },
+    { src: zingage2, alt: "Zingage" },
+    { src: zingage3, alt: "Zingage" },
+    { src: zingage5, alt: "Zingage" },
+    { src: zingage6, alt: "Zingage" },
+    { src: zingage7, alt: "Zingage" }
+];
+
+
+  const bruniImg = [
+    { src: bruni1, alt: "Brunissage" },
+    { src: bruni2, alt: "Brunissage" },
+    { src: bruni3, alt: "Brunissage" }
+]
 
   // Configuration du carrousel
   const carouselSettings = {
     dots: false,
     infinite: true,
-    speed: 200,
+    speed: 250,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -50,7 +87,7 @@ export default function Zigzag() {
                 {/* Image Carousel */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
-                    {images.map((image, index) => (
+                    {phosphatationImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">
                           <Image
                               className="object-contain max-h-full"
@@ -101,7 +138,7 @@ export default function Zigzag() {
                 {/* Image Carousel */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
                   <Slider {...carouselSettings}>
-                    {images.map((image, index) => (
+                    {zingageImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">
                           <Image
                               className="object-contain max-h-full"
@@ -152,7 +189,7 @@ export default function Zigzag() {
                 {/* Image Carousel */}
                 <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
-                    {images.map((image, index) => (
+                    {bruniImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">
                           <Image
                               className="object-contain max-h-full"
