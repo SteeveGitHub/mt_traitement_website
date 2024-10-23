@@ -9,6 +9,7 @@
 @import 'additional-styles/header.css';
 @import 'additional-styles/swiper.css';
 @import 'additional-styles/cookie-banner.css';
+@import 'additional-styles/features.css';
 
 @import 'tailwindcss/utilities';
 
@@ -23,3 +24,4 @@
 [x-cloak=""] {
     display: none;
 }
+

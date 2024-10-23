@@ -3,7 +3,7 @@ import Batiment from "@/public/images/batiment_ajuste.png";
 
 export default function Hero() {
   return (
-    <section>
+    <section id={'hero'}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
 
         {/* Illustration behind hero content */}

@@ -15,6 +15,7 @@ export default function Home() {
   return (
     <>
         {/*<CookieBanner/>*/}
+        <EnterPage/>
       <Hero />
       <Features />
       <Zigzag />

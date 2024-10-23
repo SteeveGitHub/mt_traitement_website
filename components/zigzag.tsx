@@ -61,6 +61,7 @@ export default function Zigzag() {
     autoplay: true,
     autoplaySpeed: 2000,
     adaptiveHeight: true,
+    arrows: false,
   };
 
   return (
