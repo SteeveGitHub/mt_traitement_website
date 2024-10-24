@@ -51,9 +51,9 @@ const CompanyStats = () => {
                 {/* Third Row */}
                 <div className="relative p-8 bg-blueGray-100 flex items-center justify-center">
                     <p className="text-lg">
-                        Nous sommes situés au <br/>
+                        Nous sommes situés au :<br/>
                         <span className="text-white">
-                                : 55 RUE EMILE ZOLA
+                                  55 RUE EMILE ZOLA
                                   <br/>
                                   69150 DECINES CHARPIEU
                                   <br/>
