@@ -5,6 +5,7 @@ import React from 'react';
 import barres from '@/public/images/company-stats/barres.jpg';
 import workers from '@/public/images/company-stats/workers.jpg';
 import elevate from '@/public/images/company-stats/elevate.jpg';
+import Link from "next/link";
 
 const CompanyStats = () => {
     return (<section className="bg-white py-16 ">
@@ -59,7 +60,7 @@ const CompanyStats = () => {
                                 </span>
                         {/* Ajoutez ici votre contenu après le dernier <br /> */}
                         <br/>
-                        <a href="#maps" target="_blank" rel="noopener noreferrer">
+                        <Link href="/#maps" rel="noopener noreferrer">
                         <span className="text-superRed-100 flex items-center justify-center">
                           <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +78,7 @@ const CompanyStats = () => {
                             />
                           </svg>
                         </span>
-                        </a>
+                        </Link>
 
                     </p>
                 </div>
