@@ -19,7 +19,7 @@ export default function Footer() {
                   <img src={"/images/not_native/LOGO_1_-removebg-preview.png"} alt={"mt-logo"}/>
                 </Link>
               </div>
-              <div className="text-white text-center w-11/12">
+              <div className="text-white text-center w-3/4 text-xs md:text-base">
                 Notre entreprise est un acteur incontournable de la métallurgie dans la région. Forts de
                 notre expérience de plus de 30 ans, nous pouvons répondre à tous vos besoins en matière
                 de traitements de surfaces métalliques.
@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="md:flex md:items-center md:justify-between">
 
             {/* Copyrights note */}
-            <div className="text-white text-sm mr-4">&copy; MT-TRAITEMENT.COM. Tous droits réservés.</div>
+            <div className="text-xs md:text-base text-white text-sm mr-4">&copy; MT-TRAITEMENT.COM. Tous droits réservés.</div>
 
           </div>
 

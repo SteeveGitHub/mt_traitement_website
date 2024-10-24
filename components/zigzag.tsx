@@ -85,7 +85,7 @@ export default function Zigzag() {
               {/* 1st item: Manganese Phosphating */}
               <div className="md:grid md:grid-cols-12 md:gap-6 items-center justify-center" id="phosphatation">
                 {/* Image Carousel */}
-                <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
+                <div className="max-w-xs sm:max-w-xl md:max-w-none md:w-full sm:mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
                     {phosphatationImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">
@@ -93,7 +93,7 @@ export default function Zigzag() {
                               className="object-contain max-h-full"
                               src={image.src}
                               alt={image.alt}
-                              style={{ float : "left", width: "500", height : "500", objectFit: "cover" }}
+                              style={{ float: "left", width: "100%", height: "auto", objectFit: "cover" }}
                           />
                         </div>
                     ))}
@@ -136,7 +136,7 @@ export default function Zigzag() {
               {/* 2nd item: White Zinc Plating */}
               <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id={'zingage'}>
                 {/* Image Carousel */}
-                <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
+                <div className="max-w-xs sm:max-w-xl md:max-w-none md:w-full sm:mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
                     {zingageImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">
@@ -187,7 +187,7 @@ export default function Zigzag() {
               {/* 3rd item: Browning */}
               <div className="md:grid md:grid-cols-12 md:gap-6 items-center" id={'brunissage'}>
                 {/* Image Carousel */}
-                <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
+                <div className="max-w-xs sm:max-w-xl md:max-w-none md:w-full sm:mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
                   <Slider {...carouselSettings}>
                     {bruniImg.map((image, index) => (
                         <div className="flex justify-center items-center w-full h-full">

@@ -56,19 +56,37 @@ export default function MobileMenu() {
       <nav
         id="mobile-nav"
         ref={mobileNav}
-        className="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out"
-        style={mobileNavOpen ? { maxHeight: mobileNav.current?.scrollHeight, opacity: 1 } : { maxHeight: 0, opacity: 0.8 }}
+        className="absolute  top-full z-20 left-0 w-full overflow-hidden transition-all duration-300 ease-in-out"
+        style={mobileNavOpen ? { maxHeight: mobileNav.current?.scrollHeight} : { maxHeight: 0 }}
       >
-        <ul className="bg-gray-800 px-4 py-2">
+        <ul className=" px-4 py-2 bg-gray-800/100">
           <li>
-            <Link href="/signin" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
-              Notre savoir-faire
-
+            <Link
+                href="/#phosphatation"
+                className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+                onClick={() => setMobileNavOpen(false)}>
+              Phosphatation
             </Link>
           </li>
           <li>
             <Link
-              href="/signup"
+                href="/#zingage"
+                className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+                onClick={() => setMobileNavOpen(false)}>
+              Zingage
+            </Link>
+          </li>
+          <li>
+            <Link
+                href="/#brunissage"
+                className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+                onClick={() => setMobileNavOpen(false)}>
+              Brunissage
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/contact"
               className="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" onClick={() => setMobileNavOpen(false)}
             >
               Demander un devis

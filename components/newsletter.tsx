@@ -39,7 +39,7 @@ export default function Newsletter() {
           <div className="relative bg-purple-600 py-10 px-8 md:py-16 md:px-12" data-aos="fade-up">
             <div className="relative flex flex-col lg:flex-row justify-between items-center">
               <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
-                <h3 className="h3 text-white mb-2">Vous souhaitez être recontacté ?</h3>
+                <h3 className="text-base md:text-xl h3 text-white mb-2">Vous souhaitez être recontacté ?</h3>
                 <p className="text-purple-200 text-lg">
                   Inscrivez votre mail. On s'occupe de tout &#x1F601;.
                 </p>
