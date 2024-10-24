@@ -77,3 +77,12 @@
 .form-radio {
     @apply text-purple-600;
 }
+
+.mttraitementh1{
+    /*font-family: 'Kantumruy Pro', sans-serif;*/
+}
+.mttraitementp{
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}

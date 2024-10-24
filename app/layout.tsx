@@ -36,6 +36,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased text-gray-200 tracking-tight`}>
+
+
         <div className="flex flex-col min-h-screen overflow-hidden">
           <ToastContainer/>
           <Header />
