@@ -14,7 +14,7 @@ export default function SignUp() {
     email: '',
     message: ''
   });
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<Array<any>>([]);
   const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = (e : any) => {

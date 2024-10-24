@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Newsletter() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
 
   const validEmail = new RegExp('^[\\w!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e : React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (email !== '' && validEmail.test(email)) {
       try {
