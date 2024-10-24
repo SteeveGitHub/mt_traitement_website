@@ -70,7 +70,7 @@ export default function SignUp() {
   };
 
   const onDrop = (acceptedFiles : any) => {
-    setFiles(acceptedFiles);
+    setFiles(prevFiles => [...prevFiles, ...acceptedFiles]); // Merge new files with previous ones  };
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -87,7 +87,7 @@ export default function SignUp() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="pt-32 pb-12 md:pt-40 md:pb-20">
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-              <h1 className="h1">Bienvenue. Nous sommes heureux de prendre contact avec vous.</h1>
+              <h1 className="h1">Bonjour. Nous sommes heureux de prendre contact avec vous.</h1>
             </div>
             <div className="max-w-sm mx-auto">
               <form onSubmit={handleSubmit}>
@@ -154,7 +154,7 @@ export default function SignUp() {
                   <div className="w-full px-3">
                     <div {...getRootProps({ className: 'dropzone' })} className="border-2 border-dashed border-gray-300 p-4 text-center">
                       <input {...getInputProps()} />
-                      <p>Glissez-déposez des fichiers ici, ou cliquez pour sélectionner des fichiers</p>
+                      <p>Glissez-déposez des fichiers ici ou cliquez pour déposer.</p>
                     </div>
                     <div>
                       {files.map((file : any, index) => (
