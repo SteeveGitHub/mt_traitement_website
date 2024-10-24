@@ -10,7 +10,6 @@ export const config = {
         bodyParser: false,
     },
 };
-
 const uploadDir = path.resolve(process.cwd(), 'uploads');
 
 if (!fs.existsSync(uploadDir)) {
@@ -19,6 +18,7 @@ if (!fs.existsSync(uploadDir)) {
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
+        console.log('POST request received');
         const form = formidable({
             multiples: true,
             uploadDir: uploadDir,
@@ -27,10 +27,11 @@ export default async function handler(req, res) {
 
         form.parse(req, async (err, fields, files) => {
             if (err) {
-                console.error('Erreur à la lecture des fichiers:', err);
+                console.error('Error parsing files:', err);
                 return res.status(500).json({ error: 'Error parsing files' });
             }
 
+            console.log('Files received:', files);
             const { fullName, companyName, email, message, captchaToken } = fields;
 
             // Verify reCAPTCHA token
