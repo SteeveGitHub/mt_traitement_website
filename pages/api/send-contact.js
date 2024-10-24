@@ -25,14 +25,14 @@ export default async function handler(req, res) {
             keepExtensions: true,
         });
 
-        form.parse(req, async (err, fields, files) => {
+        await form.parse(req, async (err, fields, files) => {
             if (err) {
                 console.error('Error parsing files:', err);
-                return res.status(500).json({ error: 'Error parsing files' });
+                return res.status(500).json({error: 'Error parsing files'});
             }
 
             console.log('Files received:', files);
-            const { fullName, companyName, email, message, captchaToken } = fields;
+            const {fullName, companyName, email, message, captchaToken} = fields;
 
             // Verify reCAPTCHA token
             const secretKey = process.env.RECAPTCHA_SECRET_KEY;
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
             const data = await response.json();
 
             if (!data.success) {
-                return res.status(400).json({ error: 'Invalid CAPTCHA' });
+                return res.status(400).json({error: 'Invalid CAPTCHA'});
             }
 
             // Create a transporter object
@@ -94,7 +94,7 @@ export default async function handler(req, res) {
                 const archivePath = path.join(uploadDir, 'attachments.zip');
                 const output = fs.createWriteStream(archivePath);
                 const archive = archiver('zip', {
-                    zlib: { level: 9 } // Maximum compression
+                    zlib: {level: 9} // Maximum compression
                 });
 
                 output.on('close', async () => {
@@ -112,21 +112,21 @@ export default async function handler(req, res) {
                             fs.unlinkSync(attachment.path);
                         });
                         fs.unlinkSync(archivePath);
-                        return res.status(200).json({ message: 'Email transmis' });
+                        return res.status(200).json({message: 'Email transmis'});
                     } catch (error) {
                         console.error('Erreur à l\'envoi de l\'email:', error);
-                        return res.status(500).json({ error: "Erreur à l'envoi" });
+                        return res.status(500).json({error: "Erreur à l'envoi"});
                     }
                 });
 
                 archive.on('error', (err) => {
                     console.error('Error creating archive:', err);
-                    return res.status(500).json({ error: 'Error creating archive' });
+                    return res.status(500).json({error: 'Error creating archive'});
                 });
 
                 archive.pipe(output);
                 attachments.forEach(file => {
-                    archive.file(file.path, { name: file.filename });
+                    archive.file(file.path, {name: file.filename});
                 });
                 await archive.finalize();
             } else {
@@ -136,10 +136,10 @@ export default async function handler(req, res) {
                     attachments.forEach(attachment => {
                         fs.unlinkSync(attachment.path);
                     });
-                    return res.status(200).json({ message: 'Email transmis' });
+                    return res.status(200).json({message: 'Email transmis'});
                 } catch (error) {
                     console.error('Erreur à l\'envoi de l\'email:', error);
-                    return res.status(500).json({ error: "Erreur à l'envoi" });
+                    return res.status(500).json({error: "Erreur à l'envoi"});
                 }
             }
         });
