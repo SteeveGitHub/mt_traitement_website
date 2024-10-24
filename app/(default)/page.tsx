@@ -1,8 +1,8 @@
 import CookieBanner from "@/components/cookie-banner";
 
 export const metadata = {
-  title: 'Home - Open PRO',
-  description: 'Page description',
+  title: "Page d'accueil",
+  description: 'Accueil',
 }
 
 import Hero from '@/components/hero'
