@@ -10,29 +10,34 @@ export const config = {
         bodyParser: false,
     },
 };
-const uploadDir = path.resolve(process.cwd(), 'uploads');
 
+const uploadDir = path.join('/tmp', 'uploads');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
+
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        console.log('POST request received');
+        const uploadDir = path.join('/tmp', 'uploads'); // Utilisez /tmp pour Vercel
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir);
+        }
+
         const form = formidable({
             multiples: true,
             uploadDir: uploadDir,
             keepExtensions: true,
+            maxFileSize: 4 * 1024 * 1024, // Limite à 4MB pour Vercel
         });
 
-        await form.parse(req, async (err, fields, files) => {
+        form.parse(req, async (err, fields, files) => {
             if (err) {
                 console.error('Error parsing files:', err);
-                return res.status(500).json({error: 'Error parsing files'});
+                return res.status(500).json({ error: 'Error parsing files' });
             }
 
-            console.log('Files received:', files);
-            const {fullName, companyName, email, message, captchaToken} = fields;
+            const { fullName, companyName, email, message, captchaToken } = fields;
 
             // Verify reCAPTCHA token
             const secretKey = process.env.RECAPTCHA_SECRET_KEY;
@@ -45,7 +50,7 @@ export default async function handler(req, res) {
             const data = await response.json();
 
             if (!data.success) {
-                return res.status(400).json({error: 'Invalid CAPTCHA'});
+                return res.status(400).json({ error: 'Invalid CAPTCHA' });
             }
 
             // Create a transporter object
@@ -70,18 +75,11 @@ export default async function handler(req, res) {
                             filename: file.originalFilename,
                             path: file.filepath,
                         });
-                    } else {
-                        console.error('File path is undefined for file:', file);
                     }
                 });
             }
 
-            // Check total size of attachments and compress if necessary
-            let totalSize = 0;
-            attachments.forEach(file => {
-                totalSize += fs.statSync(file.path).size;
-            });
-
+            // Send email with or without compression based on attachment size
             const mailOptions = {
                 from: process.env.EMAIL_USER,
                 to: process.env.EMAIL_USER,
@@ -90,57 +88,16 @@ export default async function handler(req, res) {
                 attachments: attachments,
             };
 
-            if (totalSize > 25 * 1024 * 1024) { // 25MB limit
-                const archivePath = path.join(uploadDir, 'attachments.zip');
-                const output = fs.createWriteStream(archivePath);
-                const archive = archiver('zip', {
-                    zlib: {level: 9} // Maximum compression
+            try {
+                await transporter.sendMail(mailOptions);
+                // Clean up uploaded files after sending email
+                attachments.forEach(attachment => {
+                    fs.unlinkSync(attachment.path);
                 });
-
-                output.on('close', async () => {
-                    mailOptions.attachments = [
-                        {
-                            filename: 'attachments.zip',
-                            path: archivePath
-                        }
-                    ];
-
-                    try {
-                        await transporter.sendMail(mailOptions);
-                        // Clean up uploaded files and archive after sending email
-                        attachments.forEach(attachment => {
-                            fs.unlinkSync(attachment.path);
-                        });
-                        fs.unlinkSync(archivePath);
-                        return res.status(200).json({message: 'Email transmis'});
-                    } catch (error) {
-                        console.error('Erreur à l\'envoi de l\'email:', error);
-                        return res.status(500).json({error: "Erreur à l'envoi"});
-                    }
-                });
-
-                archive.on('error', (err) => {
-                    console.error('Error creating archive:', err);
-                    return res.status(500).json({error: 'Error creating archive'});
-                });
-
-                archive.pipe(output);
-                attachments.forEach(file => {
-                    archive.file(file.path, {name: file.filename});
-                });
-                await archive.finalize();
-            } else {
-                try {
-                    await transporter.sendMail(mailOptions);
-                    // Clean up uploaded files after sending email
-                    attachments.forEach(attachment => {
-                        fs.unlinkSync(attachment.path);
-                    });
-                    return res.status(200).json({message: 'Email transmis'});
-                } catch (error) {
-                    console.error('Erreur à l\'envoi de l\'email:', error);
-                    return res.status(500).json({error: "Erreur à l'envoi"});
-                }
+                return res.status(200).json({ message: 'Email transmis' });
+            } catch (error) {
+                console.error('Erreur à l\'envoi de l\'email:', error);
+                return res.status(500).json({ error: "Erreur à l'envoi" });
             }
         });
     } else {
