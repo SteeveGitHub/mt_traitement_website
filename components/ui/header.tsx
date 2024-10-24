@@ -3,7 +3,7 @@ import MobileMenu from './mobile-menu'
 import Image from 'next/image'
 export default function Header() {
   return (
-    <header className="absolute w-full z-30 bg-gray-50 opacity-90">
+    <header className="absolute w-full z-30 bg-gray-50 opacity-90" id={'header'}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Site branding */}
